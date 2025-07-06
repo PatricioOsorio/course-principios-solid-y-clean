@@ -36,4 +36,36 @@
     console.log('Crear actor');
     return true;
   }
+
+  // const getPayAmount = ({ isDead = false, isSeparated = true, isRetired = false }) => {
+  //   let result;
+  //   if (isDead) {
+  //     result = 1500;
+  //   } else {
+  //     if (isSeparated) {
+  //       result = 2500;
+  //     } else {
+  //       if (isRetired) {
+  //         result = 3000;
+  //       } else {
+  //         result = 4000;
+  //       }
+  //     }
+  //   }
+
+  //   return result;
+  // };
+
+  interface IPayAmountParams {
+    isDead: boolean;
+    isSeparated: boolean;
+    isRetired: boolean;
+  }
+
+  const getPayAmount = ({ isDead, isSeparated, isRetired }: IPayAmountParams) => {
+    if (isDead) return 1500;
+    if (isSeparated) return 2500;
+    if (isRetired) return 3000;
+    return 4000;
+  };
 })();
