@@ -1,9 +1,12 @@
 import jsonPosts from '../data/local-database.json';
+import { IPost } from './05-depencency-b';
 
-export class LocalDataBaseService {
-  constructor() {}
+export abstract class PostProvider {
+  abstract getPosts(): Promise<IPost[]>;
+}
 
-  async getFakePosts() {
+export class LocalDataBaseService implements PostProvider {
+  async getPosts() {
     return [
       {
         userId: 1,
@@ -21,10 +24,18 @@ export class LocalDataBaseService {
   }
 }
 
-export class JsonDataBaseService {
-  // constructor() {}
-
+export class JsonDataBaseService implements PostProvider {
   async getPosts() {
     return jsonPosts;
+  }
+}
+
+export class WebApiPostProviderService implements PostProvider {
+  async getPosts() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+    const data = await response.json();
+
+    return data;
   }
 }
