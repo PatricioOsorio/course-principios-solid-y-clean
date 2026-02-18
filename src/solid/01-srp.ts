@@ -23,20 +23,37 @@
   }
 
   class ProductBloc {
+    private productService: ProductService;
+    private notifications: Notifications;
+
+    constructor(productService: ProductService, notifications: Notifications) {
+      this.productService = productService;
+      this.notifications = notifications;
+    }
+
+    loadProduct(id: number) {
+      this.productService.getProduct(id);
+    }
+
+    saveProduct(product: IProduct) {
+      this.productService.saveProduct(product);
+    }
+
     notifyClients() {
-      console.log('Enviando correo a los clientes');
+      this.notifications.sendEmail(['some.user@email.com'], 'to-clients');
     }
   }
 
   class CardBloc {
     addToCart(productId: number) {
-      // Agregar al carrito de compras
       console.log('Agregando al carrito ', productId);
     }
   }
 
-  const productBloc = new ProductBloc();
   const productService = new ProductService();
+  const notifications = new Notifications();
+
+  const productBloc = new ProductBloc(productService, notifications);
   const cardBloc = new CardBloc();
 
   productBloc.loadProduct(10);
