@@ -1,11 +1,12 @@
-import axios from 'axios';
-
 export class HttpClient {
   async get(url: string) {
-    const { data, status, ...rest } = await axios.get(url);
+    const response = await fetch(url);
+
+    const data = await response.json();
+    const status = response.status;
 
     console.log({ data, status });
 
-    return { data, status, ...rest };
+    return { data, status };
   }
 }
