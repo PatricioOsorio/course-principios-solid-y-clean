@@ -1,5 +1,5 @@
 import './style.css';
-import './clean-code/05-dry';
+import './solid/01-srp';
 const app = document.querySelector<HTMLDivElement>('#app')!;
 
 app.innerHTML = `
